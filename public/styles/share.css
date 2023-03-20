@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.nav-container {
+  padding: 1.8rem 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(32, 31, 31);
+}
+
+.logo {
+  text-decoration: none;
+  color: antiquewhite;
+  font-size: 2rem;
+  margin: auto 0;
+}
+
+.menu-bar {
+  display: flex;
+}
+
+.menu-item {
+  text-decoration: none;
+  color: antiquewhite;
+  font-size: 1.5rem;
+  margin-left: 4rem;
+}
+
+.menu-item:hover {
+  color: rgb(173, 201, 18);
+}
