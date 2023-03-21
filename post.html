@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>글쓰기</title>
+    <title>게시글</title>
     <link rel="stylesheet" href="public/styles/share.css" />
-    <link rel="stylesheet" href="public/styles/write.css" />
+    <link rel="stylesheet" href="public/styles/board.css" />
   </head>
   <body>
     <div class="nav-container">
@@ -22,22 +22,33 @@
       <span></span>
       <span></span>
     </a>
-    <div class="write-container">
-      <h1>글쓰기</h1>
-      <div class="write-item">
-        <label for="">제목</label>
-        <input type="text" required />
+    <div class="main-container">
+      <div class="main-title">
+        <h1>게시글</h1>
+        <p>게시글을 확인해보세요.</p>
       </div>
-      <div class="write-item">
-        <label for="">내용</label>
-        <textarea type="text" required rows="8"></textarea>
+      <div class="borad-list-container">
+        <div class="borad-list"></div>
+        <div class="board-page"></div>
+        <div class="btn-wrap">
+          <button class="btn-list">목록</button>
+          <button>수정</button>
+        </div>
       </div>
-      <div class="write-item">
-        <label for="">작성자</label>
-        <input type="text" required />
-      </div>
-      <button class="btn btn-add">등록</button>
-      <button class="btn btn-cancel">취소</button>
     </div>
   </body>
 </html>
+
+<!-- <div class="board-container">
+  <div class="board-title">
+    
+  </div>
+
+  <div class="post-detail">
+    <div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+</div> -->
