@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 .main-container {
   width: 60rem;
   margin: 6rem auto;
@@ -17,9 +21,9 @@
   font-size: 0;
 }
 
-.btn-wrap button {
+.btn-wrap a {
   display: inline-block;
-  min-width: 5rem;
+  max-width: 5rem;
   margin-left: 10px;
   padding: 0.5rem 2rem;
   font-size: 0.9rem;
@@ -27,12 +31,108 @@
   border-radius: 2px;
 }
 
-.btn-wrap button:first-child {
+.btn-wrap a:first-child {
   margin-left: 0;
 }
 
 .btn-wrap .btn-add,
 .btn-wrap .btn-list {
+  background-color: black;
+  color: white;
+}
+
+.borad-list {
+  width: 100%;
+  border-top: 2px solid black;
+}
+
+.borad-list .borad-top {
+  border-bottom: 1px solid rgb(170, 164, 164);
+}
+
+.borad-list .borad-top > div {
+  font-weight: 600;
+}
+
+.borad-list > div {
+  border-bottom: 1px solid rgb(221, 221, 221);
+  font-size: 0;
+}
+
+.borad-list > div:last-child {
+  border-bottom: 1px solid black;
+}
+
+.borad-list > div > div {
+  display: inline-block;
+  padding: 0.8rem 0;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.borad-list .num {
+  width: 10%;
+}
+
+.borad-list .title {
+  width: 60%;
+  text-align: left;
+}
+
+.borad-list .borad-top .title {
+  text-align: center;
+}
+
+.borad-list .writer {
+  width: 10%;
+}
+
+.borad-list .date {
+  width: 10%;
+}
+
+.borad-list .count {
+  width: 10%;
+}
+
+.borad-list a {
+  color: black;
+}
+
+.borad-page {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0;
+}
+
+.borad-page a {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+  border: 1px solid rgb(221, 221, 221);
+  border-left: 0;
+  vertical-align: middle;
+  line-height: 100%;
+}
+
+.borad-page .btn {
+  font-size: 0.6rem;
+  padding-top: 10px;
+  letter-spacing: -1px;
+}
+
+.borad-page .first {
+  border-left: 1px solid rgb(221, 221, 221);
+}
+
+.borad-page .btn-num {
+  font-size: 0.8rem;
+  padding-top: 9px;
+}
+
+.borad-page .btn-num.on {
+  border-color: black;
   background-color: black;
   color: white;
 }
