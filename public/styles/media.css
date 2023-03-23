@@ -1,0 +1,64 @@
+@media (max-width: 1000px) {
+  /* .nav-container {
+    max-width: 60rem;
+  } */
+  .main-container {
+    min-width: 20rem;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+  }
+  .borad-list .borad-num,
+  .borad-list .borad-writer,
+  .borad-list .borad-count {
+    display: none;
+  }
+  .borad-list .borad-date {
+    width: 40%;
+  }
+  .borad-list .borad-title {
+    text-indent: 1rem;
+  }
+  .borad-list .borad-top .borad-title {
+    text-indent: 0;
+  }
+  .borad-page a {
+    width: 26px;
+    height: 26px;
+  }
+  .borad-page .btn {
+    padding-top: 7px;
+  }
+  .borad-page .btn-num {
+    padding-top: 6px;
+  }
+  .borad-view .borad-info dl {
+    width: 50%;
+    padding: 0;
+  }
+  .borad-view .borad-info dl:nth-child(-n + 2) {
+    margin-bottom: 5px;
+  }
+  .borad-view .borad-info dl::before {
+    display: none;
+  }
+  .borad-view .borad-info dl dt,
+  .borad-view .borad-info dl dd {
+    font-size: 0.9rem;
+  }
+  .board-write .write-title label,
+  .board-write .write-info label {
+    display: none;
+  }
+  .board-write .write-title input {
+    width: 99%;
+  }
+  .board-write .write-info input {
+    width: 98%;
+  }
+  .board-write .write-title input {
+    margin-left: 0.5%;
+  }
+  .board-write .write-info input {
+    margin-left: 1%;
+  }
+}
