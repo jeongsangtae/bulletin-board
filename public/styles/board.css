@@ -1,46 +1,3 @@
-a {
-  text-decoration: none;
-}
-
-.main-container {
-  width: 60rem;
-  margin: 6rem auto;
-}
-
-.main-title {
-  margin-bottom: 1.8rem;
-}
-
-.main-title p {
-  margin-top: 5px;
-}
-
-.btn-wrap {
-  margin-top: 2rem;
-  text-align: center;
-  font-size: 0;
-}
-
-.btn-wrap a {
-  display: inline-block;
-  max-width: 5rem;
-  margin-left: 10px;
-  padding: 0.5rem 2rem;
-  font-size: 0.9rem;
-  border: 1px solid black;
-  border-radius: 2px;
-}
-
-.btn-wrap a:first-child {
-  margin-left: 0;
-}
-
-.btn-wrap .btn-add,
-.btn-wrap .btn-list {
-  background-color: black;
-  color: white;
-}
-
 .borad-list {
   width: 100%;
   border-top: 2px solid black;
@@ -55,7 +12,7 @@ a {
 }
 
 .borad-list > div {
-  border-bottom: 1px solid rgb(221, 221, 221);
+  border-bottom: 1px dashed rgb(221, 221, 221);
   font-size: 0;
 }
 
@@ -70,28 +27,28 @@ a {
   text-align: center;
 }
 
-.borad-list .num {
+.borad-list .borad-num {
   width: 10%;
 }
 
-.borad-list .title {
+.borad-list .borad-title {
   width: 60%;
   text-align: left;
 }
 
-.borad-list .borad-top .title {
+.borad-list .borad-top .borad-title {
   text-align: center;
 }
 
-.borad-list .writer {
+.borad-list .borad-writer {
   width: 10%;
 }
 
-.borad-list .date {
+.borad-list .borad-date {
   width: 10%;
 }
 
-.borad-list .count {
+.borad-list .borad-count {
   width: 10%;
 }
 

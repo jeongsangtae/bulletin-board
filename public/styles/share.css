@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .nav-container {
   height: 5rem;
   padding: 0 5%;
@@ -32,6 +36,54 @@
 
 .menu-item:hover {
   color: rgb(173, 201, 18);
+}
+
+.main-container {
+  width: 60rem;
+  margin: 6rem auto;
+}
+
+.main-title {
+  margin-bottom: 1.8rem;
+}
+
+.main-title p {
+  margin-top: 5px;
+}
+
+.btn-wrap {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0;
+}
+
+.btn-wrap button {
+  margin-left: 10px;
+  padding: 0.5rem 2rem;
+  font-size: 0.9rem;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.btn-wrap a {
+  display: inline-block;
+  max-width: 5rem;
+  margin-left: 10px;
+  padding: 0.5rem 2rem;
+  font-size: 0.9rem;
+  border: 1px solid black;
+  border-radius: 2px;
+  color: black;
+}
+
+.btn-wrap a:first-child {
+  margin-left: 0;
+}
+
+.btn-wrap .btn-add,
+.btn-wrap .btn-list {
+  background-color: black;
+  color: white;
 }
 
 /* .menu-btn {

@@ -4,29 +4,29 @@
   font-size: 1rem;
 }
 
-.borad-view .title {
+.borad-view .borad-title {
   padding: 20px 15px;
-  border-bottom: 1px solid rgb(221, 221, 221);
+  border-bottom: 1px dashed rgb(221, 221, 221);
   font-size: 1.5rem;
 }
 
-.borad-view .info {
+.borad-view .borad-info {
   padding: 1rem;
   border-bottom: 1px solid rgb(153, 153, 153);
   font-size: 0;
 }
 
-.borad-view .info dl {
+.borad-view .borad-info dl {
   position: relative;
   display: inline-block;
   padding: 0 1.25rem;
 }
 
-.borad-view .info dl:first-child {
+.borad-view .borad-info dl:first-child {
   padding-left: 0;
 }
 
-.borad-view .info dl::before {
+.borad-view .borad-info dl::before {
   content: "";
   position: absolute;
   top: 5px;
@@ -37,27 +37,31 @@
   background: rgb(221, 221, 221);
 }
 
-.borad-view .info dl:first-child::before {
+.borad-view .borad-info dl:first-child::before {
   display: none;
 }
 
-.borad-view .info dl dt,
-.borad-view .info dl dd {
+.borad-view .borad-info dl dt,
+.borad-view .borad-info dl dd {
   display: inline-block;
   font-size: 1rem;
 }
 
-.borad-view .info dl dt {
+.borad-view .borad-info dl dt {
 }
 
-.borad-view .info dl dd {
+.borad-view .borad-info dl dd {
   margin-left: 10px;
   color: rgb(119, 119, 119);
 }
 
-.borad-view .content {
+.borad-view .borad-content {
   padding: 1rem;
   border-bottom: 1px solid black;
   line-height: 140%;
   font-size: 1rem;
+}
+
+.btn-wrap button {
+  background-color: white;
 }
