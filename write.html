@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="public/styles/share.css" />
     <link rel="stylesheet" href="public/styles/write.css" />
     <link rel="stylesheet" href="public/styles/media.css" />
+    <script defer src="public/scripts/write.js"></script>
   </head>
   <body>
     <div class="nav-container">
@@ -27,21 +28,37 @@
         <div class="board-write">
           <div class="write-title">
             <label for="">제목</label>
-            <input type="text" required placeholder="제목 입력" />
+            <input
+              type="text"
+              id="title-input"
+              required
+              placeholder="제목 입력"
+            />
           </div>
           <div class="write-info">
             <div>
               <label for="">글쓴이</label>
-              <input type="text" required placeholder="글쓴이 입력" />
+              <input
+                type="text"
+                id="info-writer"
+                required
+                placeholder="글쓴이 입력"
+              />
             </div>
             <div>
               <label for="">비밀번호</label>
-              <input type="password" required placeholder="비밀번호 입력" />
+              <input
+                type="password"
+                id="info-password"
+                required
+                placeholder="비밀번호 입력"
+              />
             </div>
           </div>
           <div class="write-content">
             <textarea
               type="text"
+              id="content-textarea"
               required
               rows="8"
               placeholder="내용 입력"
@@ -50,7 +67,7 @@
         </div>
       </div>
       <div class="btn-wrap">
-        <button class="btn-add">등록</button>
+        <button type="submit" class="btn-add">등록</button>
         <a href="/" class="btn-cancel">취소</a>
       </div>
     </div>

@@ -1,68 +1,68 @@
-.borad-list {
+.board-list {
   width: 100%;
   border-top: 2px solid black;
 }
 
-.borad-list .borad-top {
+.board-list .board-top {
   border-bottom: 1px solid rgb(170, 164, 164);
 }
 
-.borad-list .borad-top > div {
+.board-list .board-top > div {
   font-weight: 600;
 }
 
-.borad-list > div {
+.board-list > div {
   border-bottom: 1px dashed rgb(221, 221, 221);
   font-size: 0;
 }
 
-.borad-list > div:last-child {
+.board-list > div:last-child {
   border-bottom: 1px solid black;
 }
 
-.borad-list > div > div {
+.board-list > div > div {
   display: inline-block;
   padding: 0.8rem 0;
   font-size: 1rem;
   text-align: center;
 }
 
-.borad-list .borad-num {
+.board-list .board-num {
   width: 10%;
 }
 
-.borad-list .borad-title {
+.board-list .board-title {
   width: 60%;
   text-align: left;
 }
 
-.borad-list .borad-top .borad-title {
+.board-list .board-top .board-title {
   text-align: center;
 }
 
-.borad-list .borad-writer {
+.board-list .board-writer {
   width: 10%;
 }
 
-.borad-list .borad-date {
+.board-list .board-date {
   width: 10%;
 }
 
-.borad-list .borad-count {
+.board-list .board-count {
   width: 10%;
 }
 
-.borad-list a {
+.board-list a {
   color: black;
 }
 
-.borad-page {
+.board-page {
   margin-top: 1.5rem;
   text-align: center;
   font-size: 0;
 }
 
-.borad-page a {
+.board-page a {
   display: inline-block;
   width: 32px;
   height: 32px;
@@ -73,22 +73,22 @@
   line-height: 100%;
 }
 
-.borad-page .btn {
+.board-page .btn {
   font-size: 0.6rem;
   padding-top: 10px;
   letter-spacing: -1px;
 }
 
-.borad-page .first {
+.board-page .first {
   border-left: 1px solid rgb(221, 221, 221);
 }
 
-.borad-page .btn-num {
+.board-page .btn-num {
   font-size: 0.8rem;
   padding-top: 9px;
 }
 
-.borad-page .btn-num.on {
+.board-page .btn-num.on {
   border-color: black;
   background-color: black;
   color: white;
