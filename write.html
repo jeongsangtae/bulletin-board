@@ -19,7 +19,7 @@
         <a href="write.html" class="menu-item">글쓰기</a>
       </div>
     </div>
-    <div class="main-container">
+    <form class="main-container">
       <div class="main-title">
         <h1>게시글</h1>
         <p>게시글을 작성해보세요.</p>
@@ -50,6 +50,7 @@
               <input
                 type="password"
                 id="info-password"
+                autocomplete=""
                 required
                 placeholder="비밀번호 입력"
               />
@@ -67,9 +68,9 @@
         </div>
       </div>
       <div class="btn-wrap">
-        <button type="submit" class="btn-add">등록</button>
+        <button class="btn-add">등록</button>
         <a href="/" class="btn-cancel">취소</a>
       </div>
-    </div>
+    </form>
   </body>
 </html>
