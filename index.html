@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="public/styles/share.css" />
     <link rel="stylesheet" href="public/styles/board.css" />
     <link rel="stylesheet" href="public/styles/media.css" />
-    <!-- <script defer src="puclic/scripts/main.js"></script> -->
   </head>
   <body>
     <div class="nav-container">
@@ -46,7 +45,7 @@
         <p>게시글 내용을 확인해보세요.</p>
       </div>
       <div class="board-list-container">
-        <div class="board-list">
+        <div class="board-list" id="board-list-table">
           <div class="board-top">
             <div class="board-num">번호</div>
             <div class="board-title">제목</div>
@@ -54,76 +53,37 @@
             <div class="board-date">작성일</div>
             <div class="board-count">조회</div>
           </div>
-          <div class="">
-            <div class="board-num">5</div>
-            <div class="board-title">
+          <div>
+            <div class="board-num" id="board-list-num"></div>
+            <div class="board-title" id="board-list-title"></div>
+            <div class="board-writer" id="board-list-writer"></div>
+            <div class="board-date" id="board-list-date"></div>
+            <div class="board-count" id="board-list-count"></div>
+          </div>
+          <!-- <div class="">
+            <div class="board-num" id="board-list-num">1</div>
+            <div class="board-title" id="board-list-title">
               <a href="write-content.html">글 제목</a>
             </div>
-            <div class="board-writer">정상태</div>
-            <div class="board-date">2023.03.22</div>
-            <div class="board-count">55</div>
-          </div>
-          <div class="">
-            <div class="board-num">4</div>
-            <div class="board-title">
-              <a href="write-content.html">글 제목</a>
-            </div>
-            <div class="board-writer">정상태</div>
-            <div class="board-date">2023.03.22</div>
-            <div class="board-count">55</div>
-          </div>
-          <div class="">
-            <div class="board-num">3</div>
-            <div class="board-title">
-              <a href="write-content.html">글 제목</a>
-            </div>
-            <div class="board-writer">정상태</div>
-            <div class="board-date">2023.03.22</div>
-            <div class="board-count">55</div>
-          </div>
-          <div class="">
-            <div class="board-num">2</div>
-            <div class="board-title">
-              <a href="write-content.html">글 제목</a>
-            </div>
-            <div class="board-writer">정상태</div>
-            <div class="board-date">2023.03.22</div>
-            <div class="board-count">55</div>
-          </div>
-          <div class="">
-            <div class="board-num">1</div>
-            <div class="board-title">
-              <a href="write-content.html">글 제목</a>
-            </div>
-            <div class="board-writer">정상태</div>
-            <div class="board-date">2023.03.22</div>
-            <div class="board-count">55</div>
-          </div>
+            <div class="board-writer" id="board-list-writer">정상태</div>
+            <div class="board-date" id="board-list-date">2023.03.22</div>
+            <div class="board-count" id="board-list-count">55</div>
+          </div> -->
         </div>
         <div class="board-page">
-          <a class="btn first"><</a>
-          <a class="btn prev"><<</a>
+          <a class="btn prev"></a>
           <a class="btn-num on">1</a>
           <a class="btn-num">2</a>
           <a class="btn-num">3</a>
           <a class="btn-num">4</a>
           <a class="btn-num">5</a>
           <a class="btn next">></a>
-          <a class="btn last">>></a>
         </div>
         <div class="btn-wrap">
           <a href="write.html" class="btn-add">등록</a>
         </div>
       </div>
     </div>
+    <script src="public/scripts/write.js"></script>
   </body>
 </html>
-
-<!-- <ul>
-  <li>
-    <a href="post.html">안녕하세요.</a>
-  </li>
-  <li>
-    <a href="">반갑습니다.</a>
-  </li>
-</ul> -->
