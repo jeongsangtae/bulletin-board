@@ -1,11 +1,6 @@
 const boardWriteForm = document.querySelector(".main-container");
 
 const boardListTable = document.querySelector("#board-list-table");
-const boardListNum = document.querySelector("#board-list-num");
-const boardListTitle = document.querySelector("#board-list-title");
-const boardListWriter = document.querySelector("#board-list-writer");
-const boardListDate = document.querySelector("#board-list-date");
-// const boardListCount = document.querySelector("#board-list-count");
 
 const boardTitle = document.querySelector(".board-title");
 const boardInfoNum = document.querySelector(".board-info-num");
@@ -25,6 +20,7 @@ const BOARD_LISTS = "boardlists";
 let boardData = [];
 let date = new Date(); // 현재 시간
 let num = 1;
+let count = 0;
 let linkBoardList = "index.html";
 let linkWriteContent = "write-content.html";
 
@@ -54,8 +50,11 @@ function boardLists(newBoardObject) {
     const boardListViewDate = document.createElement("div");
     boardListViewDate.classList.add("board-date");
     boardListViewDate.innerText = newBoardObject.date;
-    // const boardListViewCount = document.createElement("div");
-    // boardListViewCount.innerText = newBoardObject.count;
+
+    const boardListViewCount = document.createElement("div");
+    boardListViewCount.classList.add("board-count");
+    boardListViewCount.innerText = newBoardObject.count;
+
     const boardListViewTitle = document.createElement("div");
     boardListViewTitle.classList.add("board-title");
     const a = document.createElement("a");
@@ -63,12 +62,21 @@ function boardLists(newBoardObject) {
     a.href = linkWriteContent;
 
     boardListViewTitle.appendChild(a);
-    boardListViewTitle.addEventListener("click", writeContents);
+
+    // 클릭시 조회수가 증가하는 로직 (arrow function 사용)
+    if (newBoardObject.count >= 0) {
+      boardListViewTitle.addEventListener("click", () => {
+        newBoardObject.count++;
+        saveBoardData();
+        writeContents(newBoardObject);
+      });
+    }
 
     boardListViewTable.appendChild(boardListViewNum);
     boardListViewTable.appendChild(boardListViewTitle);
     boardListViewTable.appendChild(boardListViewWriter);
     boardListViewTable.appendChild(boardListViewDate);
+    boardListViewTable.appendChild(boardListViewCount);
 
     boardListTable.appendChild(boardListViewTable);
   }
@@ -123,6 +131,7 @@ function writeAdd(event) {
     password: saveInfoPasswordInput,
     content: saveContentInfo,
     date: date,
+    count: count,
   };
   boardData.push(newBoardObject);
   boardLists(newBoardObject);
