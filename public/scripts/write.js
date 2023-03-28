@@ -2,6 +2,10 @@ const boardWriteForm = document.querySelector(".main-container");
 
 const boardListTable = document.querySelector("#board-list-table");
 
+const boardListPage = document.querySelector("#board-list-page");
+
+const boardContentView = document.querySelector("#board-view-content");
+
 const boardTitle = document.querySelector(".board-title");
 const boardInfoNum = document.querySelector(".board-info-num");
 const boardInfoWriter = document.querySelector(".board-info-writer");
@@ -17,7 +21,9 @@ const contentInfo = document.querySelector("#content-textarea");
 const btnAdd = document.querySelector(".btn-add");
 
 const BOARD_LISTS = "boardlists";
+const PAGE_SIZE = 5;
 let boardData = [];
+let currentPage = 1;
 let date = new Date(); // 현재 시간
 let num = 1;
 let count = 0;
@@ -82,9 +88,10 @@ function boardLists(newBoardObject) {
   }
 }
 
-//
+// 게시글 클릭시 그 내용이 보여지는 곳
 function writeContents(newBoardObject) {
   const title = document.createElement("div");
+  title.classList.add("board-title");
   title.innerText = newBoardObject.title;
   const ddNum = document.createElement("dd");
   ddNum.innerText = newBoardObject.num;
@@ -107,8 +114,6 @@ function writeContents(newBoardObject) {
     boardInfoDate.appendChild(ddDate);
     boardContent.appendChild(ddContent);
   }
-
-  // boardInfoViews.appendChild()
 }
 
 // form안에 있는 input들을 가져와 내용을 작성하면 그걸 localStorage의 배열에 객체형식으로 저장한다.
@@ -151,4 +156,5 @@ if (savedBoardData !== null) {
   // num을 기준으로 내림차순 정렬
   boardData.sort((a, b) => b.num - a.num);
   parsedBoardData.forEach(boardLists);
+  parsedBoardData.forEach(writeContents);
 }
