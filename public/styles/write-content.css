@@ -8,48 +8,25 @@
   padding: 20px 15px;
   border-bottom: 1px dashed rgb(221, 221, 221);
   font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .board-view .board-info {
-  padding: 1rem;
   border-bottom: 1px solid rgb(153, 153, 153);
-  font-size: 0;
 }
 
-.board-view .board-info dl {
-  position: relative;
-  display: inline-block;
-  padding: 0 1.25rem;
+.board-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
 }
 
-.board-view .board-info dl:first-child {
-  padding-left: 0;
-}
-
-.board-view .board-info dl::before {
-  content: "";
-  position: absolute;
-  top: 5px;
-  left: 0;
-  display: block;
-  width: 1px;
-  height: 13px;
-  background: rgb(221, 221, 221);
-}
-
-.board-view .board-info dl:first-child::before {
-  display: none;
-}
-
-.board-view .board-info dl dt,
-.board-view .board-info dl dd {
-  display: inline-block;
-  font-size: 1rem;
-}
-
-.board-view .board-info dl dd {
-  margin-left: 10px;
-  color: rgb(119, 119, 119);
+.board-info-lists {
+  display: flex;
+  margin-bottom: 1rem;
+  text-indent: 0.9rem;
+  margin-right: 10%;
 }
 
 .board-view .board-content {
@@ -57,6 +34,8 @@
   border-bottom: 1px solid black;
   line-height: 140%;
   font-size: 1rem;
+  min-height: 250px;
+  max-height: 500px;
 }
 
 .btn-wrap button {

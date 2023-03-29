@@ -64,14 +64,17 @@ function boardLists(newBoardObject) {
     const boardListViewTitle = document.createElement("div");
     boardListViewTitle.classList.add("board-title");
     const a = document.createElement("a");
+    a.classList.add("board-a");
     a.innerText = newBoardObject.title;
-    a.href = linkWriteContent;
 
     boardListViewTitle.appendChild(a);
 
     // 클릭시 조회수가 증가하는 로직 (arrow function 사용)
     if (newBoardObject.count >= 0) {
-      boardListViewTitle.addEventListener("click", () => {
+      a.addEventListener("click", () => {
+        //URL 쿼리스트링 생성
+        const queryString = `?id=${newBoardObject.id}`;
+        window.location.href = `${linkWriteContent}${queryString}`;
         newBoardObject.count++;
         saveBoardData();
         writeContents(newBoardObject);
@@ -90,29 +93,24 @@ function boardLists(newBoardObject) {
 
 // 게시글 클릭시 그 내용이 보여지는 곳
 function writeContents(newBoardObject) {
-  const title = document.createElement("div");
-  title.classList.add("board-title");
-  title.innerText = newBoardObject.title;
-  const ddNum = document.createElement("dd");
-  ddNum.innerText = newBoardObject.num;
-  const ddWriter = document.createElement("dd");
-  ddWriter.innerText = newBoardObject.writer;
-  const ddDate = document.createElement("dd");
-  ddDate.innerText = newBoardObject.date;
-  const ddContent = document.createElement("div");
-  ddContent.innerText = newBoardObject.content;
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = parseInt(urlParams.get("id"));
+  const selectedBoard = boardData.find((board) => board.id === id);
   if (
     boardTitle &&
     boardInfoNum &&
     boardInfoWriter &&
     boardInfoDate &&
+    boardInfoViews &&
     boardContent
   ) {
-    boardTitle.appendChild(title);
-    boardInfoNum.appendChild(ddNum);
-    boardInfoWriter.appendChild(ddWriter);
-    boardInfoDate.appendChild(ddDate);
-    boardContent.appendChild(ddContent);
+    boardTitle.innerText = selectedBoard.title;
+    boardInfoNum.innerText = selectedBoard.num;
+    boardInfoWriter.innerText = selectedBoard.writer;
+    boardInfoDate.innerText = selectedBoard.date;
+    boardInfoViews.innerText = selectedBoard.count;
+    boardContent.innerText = selectedBoard.content;
   }
 }
 
@@ -147,6 +145,9 @@ function writeAdd(event) {
 }
 
 boardWriteForm.addEventListener("submit", writeAdd);
+
+// const urlParams = new URLSearchParams(window.location.search);
+// const id = urlParams.get("id");
 
 const savedBoardData = localStorage.getItem(BOARD_LISTS);
 

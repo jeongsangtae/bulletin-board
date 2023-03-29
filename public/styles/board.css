@@ -36,6 +36,11 @@
   text-align: left;
 }
 
+.board-list .board-a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .board-list .board-top .board-title {
   text-align: center;
 }
