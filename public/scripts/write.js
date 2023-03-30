@@ -2,6 +2,8 @@ const boardWriteForm = document.querySelector(".main-container");
 
 const boardListTable = document.querySelector("#board-list-table");
 
+const boardListTop = document.querySelector(".board-top");
+
 const boardListPage = document.querySelector("#board-list-page");
 
 const boardContentView = document.querySelector("#board-view-content");
@@ -40,7 +42,13 @@ function saveBoardData() {
 // localStorage에 저장된 데이터를 가져와 게시판 목록에 보여주는 역할을 한다.
 // 그리고 보고싶은 게시물의 제목을 클릭하면 그 해당 내용을 보여주는 페이지로 이동한다.
 function boardLists(newBoardObject) {
-  if (boardListTable !== null) {
+  const startPage = (currentPage - 1) * PAGE_SIZE;
+  const endPage = startPage + PAGE_SIZE;
+  if (
+    boardListTable !== null &&
+    newBoardObject.num > startPage &&
+    newBoardObject.num <= endPage
+  ) {
     const boardListViewTable = document.createElement("div");
     boardListViewTable.classList.add("board-list-view-table");
     boardListViewTable.id = newBoardObject.id;
@@ -91,12 +99,101 @@ function boardLists(newBoardObject) {
   }
 }
 
+// 페이지 번호와 next prev를 보여주는 함수
+function renderPageNumbers() {
+  // 기존 페이지 버튼들 삭제
+  while (boardListPage.firstChild) {
+    boardListPage.removeChild(boardListPage.firstChild);
+  }
+
+  const btnPrevPage = document.createElement("a");
+  btnPrevPage.classList.add("first");
+  btnPrevPage.innerText = "<";
+  btnPrevPage.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      boardListTable.innerHTML = "";
+      boardData.forEach(boardLists);
+
+      if (boardContentView) {
+        boardContentView.innerHTML = "";
+      }
+
+      writeContents(boardData[0]); // 첫 번째 게시물을 보여준다.
+      renderPageNumbers(); // 페이지 번호를 다시 보여준다.
+    }
+  });
+  boardListPage.appendChild(btnPrevPage);
+
+  const totalPages = Math.ceil(boardData.length / PAGE_SIZE);
+
+  for (let i = 1; i <= totalPages; i++) {
+    const pageLink = document.createElement("a");
+    pageLink.classList.add("btn");
+    pageLink.classList.add("btn-num");
+    pageLink.innerText = i;
+    pageLink.dataset.page = i;
+
+    if (i === currentPage) {
+      pageLink.classList.add("on");
+    }
+
+    pageLink.addEventListener("click", () => {
+      currentPage = i;
+      boardListTable.innerHTML = "";
+      boardData.forEach(boardLists);
+
+      if (boardContentView) {
+        boardContentView.innerHTML = "";
+      }
+
+      writeContents(boardData[0]);
+      renderPageNumbers();
+
+      const pageLinks = boardListPage.querySelectorAll(".btn-num");
+      pageLinks.forEach((link) => {
+        link.classList.remove("on");
+      });
+
+      //현재 페이지와 일치하는 버튼에 on 클래스 추가
+      const currentPageBtn = boardListPage.querySelector(
+        `.btn-num[data-page='${currentPage}']`
+      );
+      currentPageBtn.classList.add("on");
+    });
+
+    boardListPage.appendChild(pageLink);
+  }
+  const btnNextPage = document.createElement("a");
+  btnNextPage.classList.add("next");
+  btnNextPage.innerText = ">";
+  btnNextPage.addEventListener("click", () => {
+    const totalPages = Math.ceil(boardData.length / PAGE_SIZE);
+    if (currentPage < totalPages) {
+      currentPage++;
+      boardListTable.innerHTML = "";
+      boardData.forEach(boardLists);
+
+      if (boardContentView) {
+        boardContentView.innerHTML = "";
+      }
+
+      writeContents(boardData[0]);
+      renderPageNumbers();
+    }
+  });
+
+  boardListPage.appendChild(btnNextPage);
+}
+
 // 게시글 클릭시 그 내용이 보여지는 곳
 function writeContents(newBoardObject) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const id = parseInt(urlParams.get("id"));
-  const selectedBoard = boardData.find((board) => board.id === id);
+  const selectedBoard = boardData.find(
+    (newBoardObject) => newBoardObject.id === id
+  );
   if (
     boardTitle &&
     boardInfoNum &&
@@ -146,9 +243,6 @@ function writeAdd(event) {
 
 boardWriteForm.addEventListener("submit", writeAdd);
 
-// const urlParams = new URLSearchParams(window.location.search);
-// const id = urlParams.get("id");
-
 const savedBoardData = localStorage.getItem(BOARD_LISTS);
 
 if (savedBoardData !== null) {
@@ -158,4 +252,6 @@ if (savedBoardData !== null) {
   boardData.sort((a, b) => b.num - a.num);
   parsedBoardData.forEach(boardLists);
   parsedBoardData.forEach(writeContents);
+
+  renderPageNumbers();
 }
