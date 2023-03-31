@@ -211,6 +211,8 @@ function writeContents(newBoardObject) {
   }
 }
 
+function writeContentsEdit() {}
+
 // form안에 있는 input들을 가져와 내용을 작성하면 그걸 localStorage의 배열에 객체형식으로 저장한다.
 // 데이터가 저장되면 메인 페이지 즉, 게시글 목록이 있는 곳으로 돌아가도록 되어있다.
 function writeAdd(event) {
