@@ -20,7 +20,15 @@ const infoWriterInput = document.querySelector("#info-writer");
 const infoPasswordInput = document.querySelector("#info-password");
 const contentInfo = document.querySelector("#content-textarea");
 
-const btnAdd = document.querySelector(".btn-add");
+const boardTitleEditInput = document.querySelector("#board-title-edit-input");
+const infoWriterEditInput = document.querySelector("#info-writer-edit-input");
+const infoPasswordEditInput = document.querySelector(
+  "#info-password-edit-input"
+);
+const contentInfoEditInput = document.querySelector("#content-info-edit-input");
+
+const btnWrapEdit = document.querySelector("#btn-wrap-edit");
+const btnEditPage = document.querySelector("#btn-editpage");
 
 const BOARD_LISTS = "boardlists";
 const PAGE_SIZE = 5;
@@ -31,6 +39,7 @@ let num = 1;
 let count = 0;
 let linkBoardList = "index.html";
 let linkWriteContent = "write-content.html";
+let linkWriteEdit = "write-edit.html";
 
 date = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
 
@@ -186,7 +195,7 @@ function renderPageNumbers() {
   boardListPage.appendChild(btnNextPage);
 }
 
-// 게시글 클릭시 그 내용이 보여지는 곳
+// 게시글 클릭시 해당 내용이 보여진다.
 function writeContents(newBoardObject) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -208,10 +217,68 @@ function writeContents(newBoardObject) {
     boardInfoDate.innerText = selectedBoard.date;
     boardInfoViews.innerText = selectedBoard.count;
     boardContent.innerText = selectedBoard.content;
+
+    btnEditPage.addEventListener("click", (event) => {
+      event.preventDefault();
+      const queryString = `?id=${newBoardObject.id}`;
+      window.location.href = `${linkWriteEdit}${queryString}`;
+      // writeContentsEdit(selectedBoard);
+    });
   }
 }
 
-function writeContentsEdit() {}
+// 해당 게시물의 내용을 받아와 화면에 표시한다.
+function writeContentsEdit() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = parseInt(urlParams.get("id"));
+  const selectedBoard = boardData.find(
+    (newBoardObject) => newBoardObject.id === id
+  );
+  if (
+    boardTitleEditInput &&
+    infoWriterEditInput &&
+    infoPasswordEditInput &&
+    contentInfoEditInput
+  ) {
+    boardTitleEditInput.value = selectedBoard.title;
+    infoWriterEditInput.value = selectedBoard.writer;
+    infoPasswordEditInput.value = selectedBoard.password;
+    contentInfoEditInput.value = selectedBoard.content;
+  }
+}
+
+// function editContents(event) {
+//   event.preventDefault();
+//   const queryString = window.location.search;
+//   const urlParams = new URLSearchParams(queryString);
+//   const id = parseInt(urlParams.get("id"));
+//   const selectedBoardIndex = boardData.findIndex(
+//     (newBoardObject) => newBoardObject.id === id
+//   );
+//   if (
+//     boardTitleEditInput &&
+//     infoWriterEditInput &&
+//     infoPasswordEditInput &&
+//     contentInfoEditInput
+//   ) {
+//     const saveTitleInput = boardTitleEditInput.value;
+//     const saveInfoWriterInput = infoWriterEditInput.value;
+//     const saveInfoPasswordInput = infoPasswordEditInput.value;
+//     const saveContentInfo = contentInfoEditInput.value;
+//     boardData[selectedBoardIndex].title = saveTitleInput;
+//     boardData[selectedBoardIndex].writer = saveInfoWriterInput;
+//     boardData[selectedBoardIndex].password = saveInfoPasswordInput;
+//     boardData[selectedBoardIndex].content = saveContentInfo;
+//     saveBoardData();
+//     location.href = `${linkWriteContent}?id=${id}`;
+//   }
+// }
+
+// if (editForm) {
+//   writeContentsEdit();
+//   editForm.addEventListener("submit", editContents);
+// }
 
 // form안에 있는 input들을 가져와 내용을 작성하면 그걸 localStorage의 배열에 객체형식으로 저장한다.
 // 데이터가 저장되면 메인 페이지 즉, 게시글 목록이 있는 곳으로 돌아가도록 되어있다.
@@ -238,7 +305,7 @@ function writeAdd(event) {
   boardData.push(newBoardObject);
   boardLists(newBoardObject);
   writeContents(newBoardObject);
-  location.href = linkBoardList;
+  location.href = location.replace(linkBoardList);
 
   saveBoardData();
 }
