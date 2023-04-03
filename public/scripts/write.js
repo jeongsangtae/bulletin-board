@@ -4,7 +4,7 @@ const boardListTable = document.querySelector("#board-list-table");
 
 const boardListTop = document.querySelector(".board-top");
 
-const boardListPage = document.querySelector("#board-list-page");
+let boardListPage = document.querySelector("#board-list-page");
 
 const boardContentView = document.querySelector("#board-view-content");
 
@@ -108,31 +108,52 @@ function boardLists(newBoardObject) {
   }
 }
 
+// 기존 페이지 버튼을 삭제하는 함수
+function removePageNumbers() {
+  const pageLinks = boardListPage.querySelectorAll(".btn-num");
+  pageLinks.forEach((link) => {
+    link.parentNode.removeChild(link);
+  });
+}
+
 // 페이지 번호와 next prev를 보여주는 함수
 function renderPageNumbers() {
-  // 기존 페이지 버튼들 삭제
-  while (boardListPage.firstChild) {
-    boardListPage.removeChild(boardListPage.firstChild);
+  // boardListPage 요소가 존재하지 않는 경우 새로 생성
+  // boardListPage에 먼저 생성되는 버튼들로 인해 생기는 오류 처리
+  let boardList = document.createElement("div");
+  boardList.id = "board-list";
+  document.body.appendChild(boardList);
+
+  if (!boardListPage) {
+    boardListPage = document.createElement("div");
+    boardListPage.id = "board-list-page";
+    boardList.appendChild(boardListPage);
   }
 
-  const btnPrevPage = document.createElement("a");
-  btnPrevPage.classList.add("first");
-  btnPrevPage.innerText = "<";
-  btnPrevPage.addEventListener("click", () => {
-    if (currentPage > 1) {
-      currentPage--;
-      boardListTable.innerHTML = "";
-      boardData.forEach(boardLists);
+  // 기존 페이지 버튼들 삭제
+  removePageNumbers();
 
-      if (boardContentView) {
-        boardContentView.innerHTML = "";
+  // 페이지 버튼이 생성되어 있지 않다면 생성한다.
+  if (!boardListPage.querySelector(".btn-prev")) {
+    const btnPrevPage = document.createElement("a");
+    btnPrevPage.classList.add("first", "btn-prev");
+    btnPrevPage.innerText = "<";
+    btnPrevPage.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        boardListTable.innerHTML = "";
+        boardData.forEach(boardLists);
+
+        if (boardContentView) {
+          boardContentView.innerHTML = "";
+        }
+
+        writeContents(boardData[0]); // 첫 번째 게시물을 보여준다.
+        renderPageNumbers(); // 페이지 번호를 다시 보여준다.
       }
-
-      writeContents(boardData[0]); // 첫 번째 게시물을 보여준다.
-      renderPageNumbers(); // 페이지 번호를 다시 보여준다.
-    }
-  });
-  boardListPage.appendChild(btnPrevPage);
+    });
+    boardListPage.appendChild(btnPrevPage);
+  }
 
   const totalPages = Math.ceil(boardData.length / PAGE_SIZE);
 
@@ -171,28 +192,35 @@ function renderPageNumbers() {
       currentPageBtn.classList.add("on");
     });
 
-    boardListPage.appendChild(pageLink);
+    boardListPage.insertBefore(
+      pageLink,
+      boardListPage.querySelector(".btn-next")
+    );
   }
-  const btnNextPage = document.createElement("a");
-  btnNextPage.classList.add("next");
-  btnNextPage.innerText = ">";
-  btnNextPage.addEventListener("click", () => {
-    const totalPages = Math.ceil(boardData.length / PAGE_SIZE);
-    if (currentPage < totalPages) {
-      currentPage++;
-      boardListTable.innerHTML = "";
-      boardData.forEach(boardLists);
 
-      if (boardContentView) {
-        boardContentView.innerHTML = "";
+  // 페이지 버튼이 생성되어 있지 않다면 생성한다.
+  if (!boardListPage.querySelector(".btn-next")) {
+    const btnNextPage = document.createElement("a");
+    btnNextPage.classList.add("next", "btn-next");
+    btnNextPage.innerText = ">";
+    btnNextPage.addEventListener("click", () => {
+      const totalPages = Math.ceil(boardData.length / PAGE_SIZE);
+      if (currentPage < totalPages) {
+        currentPage++;
+        boardListTable.innerHTML = "";
+        boardData.forEach(boardLists);
+
+        if (boardContentView) {
+          boardContentView.innerHTML = "";
+        }
+
+        writeContents(boardData[0]);
+        renderPageNumbers();
       }
+    });
 
-      writeContents(boardData[0]);
-      renderPageNumbers();
-    }
-  });
-
-  boardListPage.appendChild(btnNextPage);
+    boardListPage.appendChild(btnNextPage);
+  }
 }
 
 // 게시글 클릭시 해당 내용이 보여진다.
@@ -222,7 +250,6 @@ function writeContents(newBoardObject) {
       event.preventDefault();
       const queryString = `?id=${newBoardObject.id}`;
       window.location.href = `${linkWriteEdit}${queryString}`;
-      // writeContentsEdit(selectedBoard);
     });
   }
 }
@@ -305,7 +332,8 @@ function writeAdd(event) {
   boardData.push(newBoardObject);
   boardLists(newBoardObject);
   writeContents(newBoardObject);
-  location.href = location.replace(linkBoardList);
+  writeContentsEdit(newBoardObject);
+  location.href = linkBoardList;
 
   saveBoardData();
 }
@@ -321,6 +349,7 @@ if (savedBoardData !== null) {
   boardData.sort((a, b) => b.num - a.num);
   parsedBoardData.forEach(boardLists);
   parsedBoardData.forEach(writeContents);
+  parsedBoardData.forEach(writeContentsEdit);
 
   renderPageNumbers();
 }

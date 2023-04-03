@@ -42,11 +42,11 @@
   background-color: white;
 }
 
-.btn-wrap a:first-child:hover {
+.btn-wrap a:hover {
   background-color: rgb(40, 40, 40);
 }
 
-.btn-wrap a:last-child:hover {
+.btn-wrap button:hover {
   cursor: pointer;
   color: rgb(54, 46, 46);
   background-color: rgb(200, 200, 200);
