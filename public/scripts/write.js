@@ -51,13 +51,9 @@ function saveBoardData() {
 // localStorage에 저장된 데이터를 가져와 게시판 목록에 보여주는 역할을 한다.
 // 그리고 보고싶은 게시물의 제목을 클릭하면 그 해당 내용을 보여주는 페이지로 이동한다.
 function boardLists(newBoardObject) {
-  const startPage = (currentPage - 1) * PAGE_SIZE;
-  const endPage = startPage + PAGE_SIZE;
-  if (
-    boardListTable !== null &&
-    newBoardObject.num > startPage &&
-    newBoardObject.num <= endPage
-  ) {
+  // const startPage = (currentPage - 1) * PAGE_SIZE;
+  // const endPage = startPage + PAGE_SIZE;
+  if (boardListTable !== null) {
     const boardListViewTable = document.createElement("div");
     boardListViewTable.classList.add("board-list-view-table");
     boardListViewTable.id = newBoardObject.id;
@@ -170,14 +166,17 @@ function renderPageNumbers() {
 
     pageLink.addEventListener("click", () => {
       currentPage = i;
+      const startPage = (currentPage - 1) * PAGE_SIZE;
+      const endPage = startPage + PAGE_SIZE;
+      const currentBoardData = boardData.slice(startPage, endPage);
       boardListTable.innerHTML = "";
-      boardData.forEach(boardLists);
+      currentBoardData.forEach(boardLists);
 
       if (boardContentView) {
         boardContentView.innerHTML = "";
       }
 
-      writeContents(boardData[0]);
+      writeContents(currentBoardData[0]);
       renderPageNumbers();
 
       const pageLinks = boardListPage.querySelectorAll(".btn-num");
@@ -347,9 +346,14 @@ if (savedBoardData !== null) {
   boardData = parsedBoardData;
   // num을 기준으로 내림차순 정렬
   boardData.sort((a, b) => b.num - a.num);
-  parsedBoardData.forEach(boardLists);
-  parsedBoardData.forEach(writeContents);
-  parsedBoardData.forEach(writeContentsEdit);
+
+  const startPage = (currentPage - 1) * PAGE_SIZE;
+  const endPage = startPage + PAGE_SIZE;
+  const currentBoardData = boardData.slice(startPage, endPage);
+
+  currentBoardData.forEach(boardLists);
+  currentBoardData.forEach(writeContents);
+  currentBoardData.forEach(writeContentsEdit);
 
   renderPageNumbers();
 }
