@@ -253,8 +253,9 @@ function writeContents(newBoardObject) {
 
     btnEditPage.addEventListener("click", (event) => {
       event.preventDefault();
-      const queryString = `?id=${newBoardObject.id}`;
+      const queryString = `?id=${selectedBoard.id}`;
       window.location.href = `${linkWriteEdit}${queryString}`;
+      writeContentsEdit(selectedBoard);
     });
   }
 }

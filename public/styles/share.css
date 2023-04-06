@@ -97,6 +97,10 @@ a {
   background-color: rgb(40, 40, 40);
 }
 
+#board-list {
+  display: none;
+}
+
 /* .menu-btn {
   width: 3rem;
   height: 3rem;
