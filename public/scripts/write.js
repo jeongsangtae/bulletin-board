@@ -137,14 +137,17 @@ function renderPageNumbers() {
     btnPrevPage.addEventListener("click", () => {
       if (currentPage > 1) {
         currentPage--;
+        const startPage = (currentPage - 1) * PAGE_SIZE;
+        const endPage = startPage + PAGE_SIZE;
+        const currentBoardData = boardData.slice(startPage, endPage);
         boardListTable.innerHTML = "";
-        boardData.forEach(boardLists);
+        currentBoardData.forEach(boardLists);
 
         if (boardContentView) {
           boardContentView.innerHTML = "";
         }
 
-        writeContents(boardData[0]); // 첫 번째 게시물을 보여준다.
+        writeContents(currentBoardData[0]); // 첫 번째 게시물을 보여준다.
         renderPageNumbers(); // 페이지 번호를 다시 보여준다.
       }
     });
@@ -206,14 +209,17 @@ function renderPageNumbers() {
       const totalPages = Math.ceil(boardData.length / PAGE_SIZE);
       if (currentPage < totalPages) {
         currentPage++;
+        const startPage = (currentPage - 1) * PAGE_SIZE;
+        const endPage = startPage + PAGE_SIZE;
+        const currentBoardData = boardData.slice(startPage, endPage);
         boardListTable.innerHTML = "";
-        boardData.forEach(boardLists);
+        currentBoardData.forEach(boardLists);
 
         if (boardContentView) {
           boardContentView.innerHTML = "";
         }
 
-        writeContents(boardData[0]);
+        writeContents(currentBoardData[0]);
         renderPageNumbers();
       }
     });
