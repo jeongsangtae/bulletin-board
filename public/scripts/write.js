@@ -4,8 +4,6 @@ const boardListTable = document.querySelector("#board-list-table");
 
 const boardListTop = document.querySelector(".board-top");
 
-let boardListPage = document.querySelector("#board-list-page");
-
 const boardContentView = document.querySelector("#board-view-content");
 
 const boardTitle = document.querySelector(".board-title");
@@ -30,6 +28,8 @@ const contentInfoEditInput = document.querySelector("#content-info-edit-input");
 const btnWrapEdit = document.querySelector("#btn-wrap-edit");
 const btnEditPage = document.querySelector("#btn-editpage");
 
+let boardListPage = document.querySelector("#board-list-page");
+
 const BOARD_LISTS = "boardlists";
 const PAGE_SIZE = 5;
 let boardData = [];
@@ -51,8 +51,6 @@ function saveBoardData() {
 // localStorage에 저장된 데이터를 가져와 게시판 목록에 보여주는 역할을 한다.
 // 그리고 보고싶은 게시물의 제목을 클릭하면 그 해당 내용을 보여주는 페이지로 이동한다.
 function boardLists(newBoardObject) {
-  // const startPage = (currentPage - 1) * PAGE_SIZE;
-  // const endPage = startPage + PAGE_SIZE;
   if (boardListTable !== null) {
     const boardListViewTable = document.createElement("div");
     boardListViewTable.classList.add("board-list-view-table");
@@ -281,37 +279,32 @@ function writeContentsEdit() {
   }
 }
 
-// function editContents(event) {
-//   event.preventDefault();
-//   const queryString = window.location.search;
-//   const urlParams = new URLSearchParams(queryString);
-//   const id = parseInt(urlParams.get("id"));
-//   const selectedBoardIndex = boardData.findIndex(
-//     (newBoardObject) => newBoardObject.id === id
-//   );
-//   if (
-//     boardTitleEditInput &&
-//     infoWriterEditInput &&
-//     infoPasswordEditInput &&
-//     contentInfoEditInput
-//   ) {
-//     const saveTitleInput = boardTitleEditInput.value;
-//     const saveInfoWriterInput = infoWriterEditInput.value;
-//     const saveInfoPasswordInput = infoPasswordEditInput.value;
-//     const saveContentInfo = contentInfoEditInput.value;
-//     boardData[selectedBoardIndex].title = saveTitleInput;
-//     boardData[selectedBoardIndex].writer = saveInfoWriterInput;
-//     boardData[selectedBoardIndex].password = saveInfoPasswordInput;
-//     boardData[selectedBoardIndex].content = saveContentInfo;
-//     saveBoardData();
-//     location.href = `${linkWriteContent}?id=${id}`;
-//   }
-// }
+function editContents(event) {
+  event.preventDefault();
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = parseInt(urlParams.get("id"));
+  const selectedBoard = boardData.find(
+    (newBoardObject) => newBoardObject.id === id
+  );
 
-// if (editForm) {
-//   writeContentsEdit();
-//   editForm.addEventListener("submit", editContents);
-// }
+  if (
+    boardTitleEditInput &&
+    infoWriterEditInput &&
+    infoPasswordEditInput &&
+    contentInfoEditInput
+  ) {
+    selectedBoard.title = boardTitleEditInput.value;
+    selectedBoard.writer = infoWriterEditInput.value;
+    selectedBoard.password = infoPasswordEditInput.value;
+    selectedBoard.content = contentInfoEditInput.value;
+
+    saveBoardData();
+    location.href = `${linkWriteContent}?id=${id}`;
+  }
+}
+
+boardWriteForm.addEventListener("submit", editContents);
 
 // form안에 있는 input들을 가져와 내용을 작성하면 그걸 localStorage의 배열에 객체형식으로 저장한다.
 // 데이터가 저장되면 메인 페이지 즉, 게시글 목록이 있는 곳으로 돌아가도록 되어있다.
