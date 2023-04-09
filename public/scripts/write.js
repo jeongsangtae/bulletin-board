@@ -1,5 +1,7 @@
 const boardWriteForm = document.querySelector(".main-container");
 
+const boardEditForm = document.querySelector("#main-edit-container");
+
 const boardListTable = document.querySelector("#board-list-table");
 
 const boardListTop = document.querySelector(".board-top");
@@ -49,10 +51,17 @@ function saveBoardData() {
   localStorage.setItem(BOARD_LISTS, JSON.stringify(boardData));
 }
 
+// id에 맞는 게시물 삭제
 function deleteBoardData(event) {
   event.preventDefault();
-  boardData = boardData.filter((board) => board.id !== parseInt());
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = parseInt(urlParams.get("id"));
+
+  // 게시물 삭제
+  boardData = boardData.filter((board) => board.id !== id);
   saveBoardData();
+  window.location.href = `${linkBoardList}`;
 }
 
 // localStorage에 저장된 데이터를 가져와 게시판 목록에 보여주는 역할을 한다.
@@ -319,10 +328,10 @@ boardWriteForm.addEventListener("submit", editContents);
 // form안에 있는 input들을 가져와 내용을 작성하면 그걸 localStorage의 배열에 객체형식으로 저장한다.
 // 데이터가 저장되면 메인 페이지 즉, 게시글 목록이 있는 곳으로 돌아가도록 되어있다.
 function writeAdd(event) {
-  console.log(titleInput.value);
-  console.log(infoWriterInput.value);
-  console.log(infoPasswordInput.value);
-  console.log(contentInfo.value);
+  // console.log(titleInput.value);
+  // console.log(infoWriterInput.value);
+  // console.log(infoPasswordInput.value);
+  // console.log(contentInfo.value);
   event.preventDefault();
   const saveTitleInput = titleInput.value;
   const saveInfoWriterInput = infoWriterInput.value;
@@ -346,7 +355,7 @@ function writeAdd(event) {
   boardLists(newBoardObject);
   writeContents(newBoardObject);
   writeContentsEdit(newBoardObject);
-  location.href = linkBoardList;
+  location.href = `${linkBoardList}`;
 
   saveBoardData();
 }
