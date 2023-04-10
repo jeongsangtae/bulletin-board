@@ -57,9 +57,24 @@ function deleteBoardData(event) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const id = parseInt(urlParams.get("id"));
-
+  const selectedBoard = boardData.find(
+    (newBoardObject) => newBoardObject.id === id
+  );
+  const deleteNum = selectedBoard.num;
+  const deleteId = selectedBoard.id;
   // 게시물 삭제
-  boardData = boardData.filter((board) => board.id !== id);
+  boardData = boardData.filter((newBoardObject) => newBoardObject.id !== id);
+
+  // 게시물을 삭제했을 때 중간에 비어있는 num과 id가 없도록 삭제한 게시물 뒤에 있는 게시물들의 num, id 값을 1씩 줄인다.
+  boardData.forEach((newBoardObject) => {
+    if (newBoardObject.num > deleteNum) {
+      newBoardObject.num -= 1;
+    }
+    if (newBoardObject.id > deleteId) {
+      newBoardObject.id -= 1;
+    }
+  });
+
   saveBoardData();
   window.location.href = `${linkBoardList}`;
 }
