@@ -31,6 +31,11 @@ const btnWrapEdit = document.querySelector("#btn-wrap-edit");
 const btnEditPage = document.querySelector("#btn-editpage");
 const btnDeletePage = document.querySelector("#btn-delete");
 
+const modalDialog = document.querySelector("#modal-dialog");
+const deletePasswordCheck = document.querySelector("#delete-password-check");
+const btnCancel = document.querySelector("#btn-off");
+const btnConfirm = document.querySelector("#btn-confirm");
+
 let boardListPage = document.querySelector("#board-list-page");
 
 const BOARD_LISTS = "boardlists";
@@ -52,8 +57,7 @@ function saveBoardData() {
 }
 
 // id에 맞는 게시물 삭제
-function deleteBoardData(event) {
-  event.preventDefault();
+function deleteBoardData() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const id = parseInt(urlParams.get("id"));
@@ -62,6 +66,7 @@ function deleteBoardData(event) {
   );
   const deleteNum = selectedBoard.num;
   const deleteId = selectedBoard.id;
+
   // 게시물 삭제
   boardData = boardData.filter((newBoardObject) => newBoardObject.id !== id);
 
@@ -286,8 +291,31 @@ function writeContents(newBoardObject) {
       window.location.href = `${linkWriteEdit}${queryString}`;
       writeContentsEdit(selectedBoard);
     });
-
-    btnDeletePage.addEventListener("click", deleteBoardData);
+    // deleteBoardData();
+    btnDeletePage.onclick = () => {
+      // const checkPassword = deletePasswordCheck.value;
+      // if (!modalDialog.open) {
+      //   modalDialog.showModal();
+      // }
+      // btnCancel.addEventListener("click", () => {
+      //   modalDialog.close();
+      // });
+      // btnConfirm.addEventListener("click", () => {
+      //   if (checkPassword === selectedBoard.password) {
+      //     deleteBoardData(selectedBoard.id);
+      //     modalDialog.close();
+      //   } else {
+      //     console.log(selectedBoard.password);
+      //     alert("비밀번호가 일치하지 않습니다.");
+      //   }
+      // });
+      const checkPassword = prompt("비밀번호를 입력하세요.");
+      if (checkPassword === selectedBoard.password) {
+        deleteBoardData(selectedBoard.id);
+      } else {
+        alert("비밀번호가 일치하지 않습니다.");
+      }
+    };
   }
 }
 
