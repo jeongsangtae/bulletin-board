@@ -92,15 +92,17 @@
   letter-spacing: -1px;
 }
 
-.board-page .first {
+.board-page .start {
   border-left: 1px solid rgb(221, 221, 221);
   font-size: 0.8rem;
   padding-top: 9px;
   cursor: pointer;
 }
 
+.board-page .first,
 .board-page .next,
-.board-page .btn-num {
+.board-page .btn-num,
+.board-page .end {
   font-size: 0.8rem;
   padding-top: 9px;
   cursor: pointer;
@@ -112,8 +114,10 @@ a.on {
   color: white;
 }
 
+.board-page .start:hover,
 .board-page .first:hover,
 .board-page .next:hover,
+.board-page .end:hover,
 .board-page .btn-num:hover {
   background-color: rgb(230, 230, 230);
 }

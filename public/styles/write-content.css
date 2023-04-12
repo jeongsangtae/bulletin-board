@@ -63,7 +63,7 @@
   background-color: rgb(219, 0, 0);
 }
 
-dialog {
+/* dialog {
   width: 30%;
   height: 30%;
   position: fixed;
@@ -114,4 +114,4 @@ dialog input {
 
 #btn-confirm:hover {
   background-color: rgb(40, 40, 40);
-}
+} */

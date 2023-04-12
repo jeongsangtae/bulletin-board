@@ -31,10 +31,10 @@ const btnWrapEdit = document.querySelector("#btn-wrap-edit");
 const btnEditPage = document.querySelector("#btn-editpage");
 const btnDeletePage = document.querySelector("#btn-delete");
 
-const modalDialog = document.querySelector("#modal-dialog");
-const deletePasswordCheck = document.querySelector("#delete-password-check");
-const btnCancel = document.querySelector("#btn-off");
-const btnConfirm = document.querySelector("#btn-confirm");
+// const modalDialog = document.querySelector("#modal-dialog");
+// const deletePasswordCheck = document.querySelector("#delete-password-check");
+// const btnCancel = document.querySelector("#btn-off");
+// const btnConfirm = document.querySelector("#btn-confirm");
 
 let boardListPage = document.querySelector("#board-list-page");
 
@@ -164,6 +164,28 @@ function renderPageNumbers() {
   removePageNumbers();
 
   // 페이지 버튼이 생성되어 있지 않다면 생성한다.
+  if (!boardListPage.querySelector(".btn-start")) {
+    const btnStartPage = document.createElement("a");
+    btnStartPage.classList.add("start", "btn-start");
+    btnStartPage.innerText = "<<";
+    btnStartPage.addEventListener("click", () => {
+      currentPage = 1;
+      const startPage = 0;
+      const endPage = startPage + PAGE_SIZE;
+      const currentBoardData = boardData.slice(startPage, endPage);
+      boardListTable.innerHTML = "";
+      currentBoardData.forEach(boardLists);
+
+      if (boardContentView) {
+        boardContentView.innerHTML = "";
+      }
+
+      writeContents(currentBoardData[0]); // 첫 번째 게시물을 보여준다.
+      renderPageNumbers(); // 페이지 번호를 다시 보여준다.
+    });
+    boardListPage.appendChild(btnStartPage);
+  }
+
   if (!boardListPage.querySelector(".btn-prev")) {
     const btnPrevPage = document.createElement("a");
     btnPrevPage.classList.add("first", "btn-prev");
@@ -260,6 +282,30 @@ function renderPageNumbers() {
 
     boardListPage.appendChild(btnNextPage);
   }
+
+  if (!boardListPage.querySelector(".btn-end")) {
+    const btnEndPage = document.createElement("a");
+    btnEndPage.classList.add("end", "btn-end");
+    btnEndPage.innerText = ">>";
+    btnEndPage.addEventListener("click", () => {
+      const totalPages = Math.ceil(boardData.length / PAGE_SIZE);
+      currentPage = totalPages;
+      const startPage = (currentPage - 1) * PAGE_SIZE;
+      const endPage = startPage + PAGE_SIZE;
+      const currentBoardData = boardData.slice(startPage, endPage);
+      boardListTable.innerHTML = "";
+      currentBoardData.forEach(boardLists);
+
+      if (boardContentView) {
+        boardContentView.innerHTML = "";
+      }
+
+      writeContents(currentBoardData[0]);
+      renderPageNumbers();
+    });
+
+    boardListPage.appendChild(btnEndPage);
+  }
 }
 
 // 게시글 클릭시 해당 내용이 보여진다.
@@ -292,6 +338,7 @@ function writeContents(newBoardObject) {
       writeContentsEdit(selectedBoard);
     });
     // deleteBoardData();
+    // onclick 속성을 사용해서 하나의 이벤트 핸들러만 등록할 수 있도록 하여, 이벤트 리스너가 중복으로 실행되는 문제가 발생하지 않는다.
     btnDeletePage.onclick = () => {
       // const checkPassword = deletePasswordCheck.value;
       // if (!modalDialog.open) {
