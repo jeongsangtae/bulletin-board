@@ -337,6 +337,7 @@ function writeContents(newBoardObject) {
       window.location.href = `${linkWriteEdit}${queryString}`;
       writeContentsEdit(selectedBoard);
     });
+
     // deleteBoardData();
     // onclick 속성을 사용해서 하나의 이벤트 핸들러만 등록할 수 있도록 하여, 이벤트 리스너가 중복으로 실행되는 문제가 발생하지 않는다.
     btnDeletePage.onclick = () => {
